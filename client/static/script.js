@@ -65,6 +65,11 @@ storeModule.factory('ProductFactory', function($http){
 			callback(output);
 		})
 	}
+	factory.addProduct = function(info, callback){
+		$http.post('/addproduct', info).success(function(){
+			callback();
+		})
+	}
 	return factory;
 })
 storeModule.controller('customersController', function(CustomerFactory){
@@ -127,4 +132,9 @@ storeModule.controller('productsController', function(ProductFactory){
 		})
 	}
 	this.getproducts();
+
+	this.addproduct = function(){
+		ProductFactory.addProduct(this.newProduct, function(){that.getproducts()});
+		that.newProduct = {};
+	}
 })

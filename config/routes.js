@@ -22,4 +22,8 @@ module.exports = function(app){
 		console.log('in routes');
 		products.show(req, res);
 	})
+	app.post('/addproduct', function(req, res){
+		console.log('adding products in the routes');
+		products.add(req, res);
+	})
 }

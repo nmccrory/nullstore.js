@@ -12,6 +12,18 @@ module.exports = (function(){
 					res.json(products);
 				}
 			})
+		},
+		add: function(req, res){
+			console.log('Made it to adding from products controller');
+			var product = new Product({name: req.body.product_name, quantity: req.body.quantity, img_url: req.body.img_url, description: req.body.description, created_at: new Date()});
+			product.save(function(err){
+				if(err){
+					console.log('unable to add product');
+				}else{
+					console.log('added product');
+					res.redirect('/products');
+				}
+			})
 		}
 	}
 })();

@@ -1,0 +1,64 @@
+<div ng-controller='ordersController as Orders'>
+	<div class="container">
+		<div class="row">
+			<div class="col s4">
+				<div class="section">
+					<h6><a href="#/customers">Customers</a> | <b>Orders</b></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-controller="customersController as C">
+		<div class="row">
+			<div class="col s6">
+				<h5>Add a new order</h5>
+				<h6>Customer</h6>
+				<select class='browser-default' ng-model="Orders.newOrder.customer_name">
+					<option value="" disabled>Choose Customer</option>
+					<option ng-repeat="customer in C.customers" ng-value=customer.name>{{customer.name}}</option>
+				</select>
+				<h6>Order</h6>
+				<div class="col s3">
+					<input type="number" ng-model='Orders.newOrder.quantity'>
+				</div>
+				<div class="col s8 offset-s1">
+					<select class='browser-default' ng-model='Orders.newOrder.product'>
+					<option value="">Choose Product</option>
+					<option ng-repeat="product in Orders.products" ng-value=product>{{product}}</option>
+				</select>
+				</div>
+				<div class="col s3 offset-s9">
+					<button class='btn btn-medium' ng-click="Orders.addorder()">Order</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s3 offset-s9">
+				<h5>Search</h5>
+				<div class="input-field">
+					<input type="text" ng-model="Orders.filter_orders">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<table class='striped'>
+					<thead>
+						<th>Customer Name</th>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Placed On</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="order in Orders.orders | filter: Orders.filter_orders | orderBy: 'customer_name'">
+							<td>{{order.customer_name}}</td>
+							<td>{{order.product}}</td>
+							<td>{{order.quantity}}</td>
+							<td>{{order.placed_at | date}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<div ng-controller="customersController as Customers">
+	<div class="container">
+		<div class="row">
+			<div class="col s4">
+				<div class="section">
+					<h6><b>Customers</b> | <a href="#/orders">Orders</a></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<h3>Add new customer:</h3>
+				<h5>Customer Name:</h5>
+				<div class="input-field">
+					<input type="text" ng-model='Customers.newCustomer.name'>
+					<button class='btn btn-medium blue' ng-click='Customers.addcustomer()'>Add</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col s3 offset-s9">
+				<h5>Search</h5>
+				<div class="input-field">
+					<input type="text" ng-model="Customers.filterCustomer">
+				</div>
+			</div>
+		</div>
+		<div style='color:red'>{{Customers.error}}</div>
+		<div class="row">
+			<div class="col s12">
+				<table class='striped'>
+					<thead>
+						<th>Customer Name</th>
+						<th>Created Date</th>
+						<th>Actions</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="customer in Customers.customers | filter: Customers.filterCustomer | orderBy: 'customer.created_at' track by $index ">
+							<td>{{customer.name}}</td>
+							<td>{{customer.created_at | date}}</td>
+							<td><a href ng-click='Customers.removecustomer(customer)'>Remove Customer</a><td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

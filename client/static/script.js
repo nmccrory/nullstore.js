@@ -8,6 +8,9 @@ storeModule.config(function ($routeProvider){
 	.when('/orders', {
 		templateUrl: 'partials/orders.html'
 	})
+	.when('/products', {
+		templateUrl: 'partials/products.html'
+	})
 	.otherwise({
 		redirectTo: '/'
 	})
@@ -53,12 +56,24 @@ storeModule.factory('OrderFactory', function($http){
 	return factory;
 })
 
+storeModule.factory('ProductFactory', function($http){
+	var products = [];
+	var factory = {};
+	factory.getProducts = function(callback){
+		$http.get('/products').success(function(output){
+			console.log(output + 'Poo');
+			callback(output);
+		})
+	}
+	return factory;
+})
 storeModule.controller('customersController', function(CustomerFactory){
 	var that = this;
 
 	this.getCustomers = function(){
 		CustomerFactory.getCustomers(function(data){
 			that.customers = data;
+			console.log(that.customers);
 		});
 	}
 	this.getCustomers();
@@ -100,4 +115,16 @@ storeModule.controller('ordersController', function(OrderFactory){
 			})
 		})
 	}
+
+})
+
+storeModule.controller('productsController', function(ProductFactory){
+	var that = this;
+
+	this.getproducts = function(){
+		ProductFactory.getProducts(function(data){
+			that.products = data;
+		})
+	}
+	this.getproducts();
 })

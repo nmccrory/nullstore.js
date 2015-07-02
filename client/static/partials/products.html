@@ -1,0 +1,50 @@
+<div ng-controller="productsController as Products">
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<div class="section">
+					<h6><a href="#">Dashboard</a> | <b>Products</b> | <a href="#/orders">Orders</a> | <a href="#/customers">Customers</a> | <a href="#">Settings</a></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col s3">
+				<div class="input-field">
+					<input type="text" placeholder="Search products" ng-model="filterProducts">
+				</div>
+				<h5>Add Product</h5>
+				<label>Name</label>
+					<input type="text" ng-model="Products.newProduct.product_name">
+				<div></div>
+				<label>Image (url)</label>
+					<input type="text" ng-model="Products.newProduct.img_url">
+				<div></div>
+				<label>Initial Quantity</label>
+					<input type="number" max=10 min=1 ng-model="Products.newProduct.quantity">
+				<div></div>
+				<label>Item Description</label>
+				<textarea class='materialize-textarea'></textarea>
+				<button class='btn btn-medium' ng-click="Products.getproducts">Add product</button>
+			</div>
+			<div class="col s9">
+			<div class="col s3 m6" ng-repeat="product in Products.products | filter: Products.filterProducts | orderBy: 'name'">
+		      <div class="card">
+		        <div class="card-image waves-effect waves-block waves-light">
+		          <img class="activator" src='{{product.img_url}}'>
+		        </div>
+		        <div class="card-content">
+		          <span class="card-title activator grey-text text-darken-4"><h6 style='max-width: 200%; max-height: 10px'>{{product.name}}<h6></span>
+		          <p>{{product.quantity}}</p>
+		        </div>
+		        <div class="card-reveal">
+		          <span class="card-title grey-text text-darken-4">{{product.name}} Description</i></span>
+		          <p>{{product.description}}</p>
+		        </div>
+		      </div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>

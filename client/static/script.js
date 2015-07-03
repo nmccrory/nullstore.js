@@ -11,6 +11,9 @@ storeModule.config(function ($routeProvider){
 	.when('/products', {
 		templateUrl: 'partials/products.html'
 	})
+	.when('/dashboard', {
+		templateUrl: 'partials/dashboard.html'
+	})
 	.otherwise({
 		redirectTo: '/'
 	})
@@ -61,7 +64,6 @@ storeModule.factory('ProductFactory', function($http){
 	var factory = {};
 	factory.getProducts = function(callback){
 		$http.get('/products').success(function(output){
-			console.log(output + 'Poo');
 			callback(output);
 		})
 	}
@@ -125,7 +127,25 @@ storeModule.controller('ordersController', function(OrderFactory){
 
 storeModule.controller('productsController', function(ProductFactory){
 	var that = this;
-
+	this.limit = 3;
+	this.show_hide = 'show more...';
+	this.uplimit = function(){
+		that.limit +=3;
+		console.log(that.products.length);
+		if(that.limit >= that.products.length){
+			that.show_hide = 'hide...';
+		}
+		if(that.limit > that.products.length+2){
+			that.resetlimit();
+		}else{
+			that.getproducts();
+		}
+	}
+	this.resetlimit = function(){
+		that.limit = 3;
+		that.show_hide = 'show more...';
+		that.getproducts();
+	}
 	this.getproducts = function(){
 		ProductFactory.getProducts(function(data){
 			that.products = data;

@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col s6">
 				<div class="section">
-					<h6><a href="#">Dashboard</a> | <a href='#/products'>Products</a> | <b>Orders</b> | <a href="#/customers">Customers</a> | <a href="#">Settings</a></h6>
+					<h6><a href="#/dashboard">Dashboard</a> | <a href='#/products'>Products</a> | <b>Orders</b> | <a href="#/customers">Customers</a> | <a href="#">Settings</a></h6>
 				</div>
 			</div>
 		</div>
@@ -21,10 +21,10 @@
 				<div class="col s3">
 					<input type="number" ng-model='Orders.newOrder.quantity'>
 				</div>
-				<div class="col s8 offset-s1">
+				<div class="col s8 offset-s1" ng-controller="productsController as Products">
 					<select class='browser-default' ng-model='Orders.newOrder.product'>
 					<option value="" disabled>Choose Product</option>
-					<option ng-repeat="product in Orders.products" ng-value=product>{{product}}</option>
+					<option ng-repeat="product in Products.products" ng-value=product.name>{{product.name}}</option>
 				</select>
 				</div>
 				<div class="col s3 offset-s9">

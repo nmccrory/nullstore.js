@@ -11,7 +11,7 @@ module.exports = (function(){
 					console.log('Products retrieved!!');
 					res.json(products);
 				}
-			})
+			});
 		},
 		add: function(req, res){
 			console.log('Made it to adding from products controller');

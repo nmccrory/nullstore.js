@@ -1,0 +1,63 @@
+<div class="container">
+	<div class="row">
+		<div class="col s6">
+			<div class="section">
+				<h6><b>Dashboard</b> | <a href="#/products">Products</a> | <a href="#/orders">Orders</a> | <a href="#/customers">Customers</a> | <a href="#">Settings</a></h6>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" ng-controller="productsController as Products">
+	<div class="row">
+		<div class="col s10 offset-s1" >
+			<h5>Recent products</h5>
+			<div class="col s3 m4" style='max-height: 300px' ng-repeat="product in Products.products | filter: filterProducts |orderBy:'created_at':true| limitTo: Products.limit">
+		      <div class="card">
+		        <div class="card-image waves-effect waves-block waves-light">
+		          <img style='height: 50%' class="activator" src='{{product.img_url}}'>
+		        </div>
+		        <div class="card-content">
+		          <span class="card-title activator grey-text text-darken-4"><h6 style='width: 100%; overflow:hidden;white-space:nowrap'>{{product.name}}<h6></span>
+		          <p><i>Quantity: {{product.quantity}}</i> </p>
+		        </div>
+		        <div class="card-reveal">
+		          <span class="card-title grey-text text-darken-4">{{product.name}} Description</i></span>
+		          <p>{{product.description}}</p>
+		        </div>
+		      </div>
+			</div>
+			</div>
+			<div style='text-align: center' class="col s12">
+				<a href ng-click="Products.uplimit()">{{Products.show_hide}}</a>
+			</div>
+	</div>
+	<div class="row">
+		<div class="col s10 offset-s1">
+		<h5>Newest orders</h5>
+		<div class="col s12" ng-controller="ordersController as Orders">
+			<ul class="collection">
+			    <li class="collection-item" ng-repeat="order in Orders.orders | orderBy: 'placed_at':true | limitTo: 5">
+			      <span class="title"><b>{{order.customer_name}}</b> ordered {{order.quantity}} {{order.product}}(s)</span>
+			    </li>
+			</ul>
+			<div style='text-align: center' class="col s12">
+				<a href="#">show more...</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s10 offset-s1">
+		<h5>Recent customers</h5>
+		<div class="col s12" ng-controller="customersController as Customers">
+			<ul class="collection">
+			    <li class="collection-item" ng-repeat="customer in Customers.customers | orderBy: 'created_at':true | limitTo: 5">
+			      <span class="title">{{customer.name}} joined the store. {{customer.created_at }}</span>
+			    </li>
+			</ul>
+			<div style='text-align: center' class="col s12">
+				<a href="#">show more...</a>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

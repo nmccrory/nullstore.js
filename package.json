@@ -1,9 +1,9 @@
 {
-  "name": "MEAN_Friends",
-  "version": "0.0.1",
+  "name": "Order Management Platform",
+  "version": "1.0.0",
   "dependencies": {
-    "angular-timeago": "^0.1.12",
+    "angular-timeago": "^0.4.4",
     "body-parser": "^1.13.1",
-    "express": "~4.2.0"
+    "express": "~4.15.3"
   }
 }

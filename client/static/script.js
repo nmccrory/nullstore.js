@@ -80,7 +80,6 @@ storeModule.controller('customersController', function(CustomerFactory){
 	this.getCustomers = function(){
 		CustomerFactory.getCustomers(function(data){
 			that.customers = data;
-			console.log(that.customers);
 		});
 	}
 	this.getCustomers();
@@ -109,7 +108,6 @@ storeModule.controller('customersController', function(CustomerFactory){
 
 storeModule.controller('ordersController', function(OrderFactory){
 	var that = this;
-	this.products = ['Nike Flyknit Racer', 'Macbook Air', 'iPhone', 'Ferrari 450 Italia', 'Samsung 4k Television'];
 
 	OrderFactory.getOrders(function(data){
 		that.orders = data;
@@ -131,7 +129,6 @@ storeModule.controller('productsController', function(ProductFactory){
 	this.show_hide = 'show more...';
 	this.uplimit = function(){
 		that.limit +=3;
-		console.log(that.products.length);
 		if(that.limit >= that.products.length){
 			that.show_hide = 'hide...';
 		}
